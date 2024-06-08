@@ -7,6 +7,7 @@ using DesafioDevFullstack.Application.Services.Internal;
 using DesafioDevFullstack.Application.Services.External.Interfaces;
 using DesafioDevFullstack.Application.Services.External;
 using DesafioDevFullstack.Application.Mappings;
+using Asp.Versioning;
 
 namespace DesafioDevFullstack
 {
@@ -24,7 +25,11 @@ namespace DesafioDevFullstack
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1");
+                    c.SwaggerEndpoint("/swagger/v2/swagger.json", "API v2");
+                });
             }
 
             app.UseHttpsRedirection();
@@ -45,9 +50,29 @@ namespace DesafioDevFullstack
             #region Services container e Swagger/OpenAPI
             // Add services to the container.
             builder.Services.AddControllers();
+            
+            #region Versioning
+            // Configure API Versioning
+            builder.Services.AddApiVersioning(options =>
+                {
+                    options.DefaultApiVersion = new ApiVersion(1, 0);
+                    options.AssumeDefaultVersionWhenUnspecified = true;
+                    options.ReportApiVersions = true;
+                })
+                .AddApiExplorer(options =>
+                {
+                    options.GroupNameFormat = "'v'VVV";
+                    options.SubstituteApiVersionInUrl = true;
+                });
+            #endregion
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "API v1", Version = "v1" });
+                options.SwaggerDoc("v2", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "API v2", Version = "v2" });
+            });
             #endregion
 
             #region Cors
