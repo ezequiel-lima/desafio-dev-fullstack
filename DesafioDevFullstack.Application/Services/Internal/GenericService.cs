@@ -1,8 +1,9 @@
-﻿using DesafioDevFullstack.Infra.Data.Interfaces;
+﻿using DesafioDevFullstack.Application.Services.Internal.Interfaces;
+using DesafioDevFullstack.Infra.Data.Interfaces;
 
-namespace DesafioDevFullstack.Application.Services
+namespace DesafioDevFullstack.Application.Services.Internal
 {
-    public class GenericService<T> where T : class
+    public class GenericService<T> : IGenericService<T> where T : class
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IReadRepository<T> _readRepository;

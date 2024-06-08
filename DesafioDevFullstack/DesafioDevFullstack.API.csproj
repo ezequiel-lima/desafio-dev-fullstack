@@ -16,10 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\DesafioDevFullstack.Application\DesafioDevFullstack.Application.csproj" />
     <ProjectReference Include="..\DesafioDevFullstack.Infra\DesafioDevFullstack.Infra.csproj" />
   </ItemGroup>

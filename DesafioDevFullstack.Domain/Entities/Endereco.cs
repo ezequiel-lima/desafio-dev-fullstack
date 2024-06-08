@@ -4,6 +4,8 @@ namespace DesafioDevFullstack.Domain.Entities
 {
     public class Endereco : Entity
     {
+        protected Endereco() { }
+
         public Endereco(string cep, string estado, string cidade, string? bairro, string? rua, string? numero)
         {
             Cep = cep;

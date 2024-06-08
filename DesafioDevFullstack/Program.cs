@@ -2,7 +2,11 @@ using DesafioDevFullstack.Infra;
 using DesafioDevFullstack.Infra.Data.Interfaces;
 using DesafioDevFullstack.Infra.Data;
 using Microsoft.EntityFrameworkCore;
-using DesafioDevFullstack.Application.Services;
+using DesafioDevFullstack.Application.Services.Internal.Interfaces;
+using DesafioDevFullstack.Application.Services.Internal;
+using DesafioDevFullstack.Application.Services.External.Interfaces;
+using DesafioDevFullstack.Application.Services.External;
+using DesafioDevFullstack.Application.Mappings;
 
 namespace DesafioDevFullstack
 {
@@ -24,14 +28,9 @@ namespace DesafioDevFullstack
             }
 
             app.UseHttpsRedirection();
-
             app.UseAuthorization();
-
             app.UseCors();
-
-
             app.MapControllers();
-
             app.Run();
         }
 
@@ -73,7 +72,18 @@ namespace DesafioDevFullstack
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped(typeof(IReadRepository<>), typeof(ReadRepository<>));
             services.AddScoped(typeof(IWriteRepository<>), typeof(WriteRepository<>));
-            services.AddScoped(typeof(GenericService<>));
+            services.AddScoped(typeof(IGenericService<>), typeof(GenericService<>));
+
+            services.AddHttpClient<IEnderecoExternoService, EnderecoExternoService>(client =>
+            {
+                client.BaseAddress = new Uri("https://brasilapi.com.br/api/cep/v2/");
+                client.DefaultRequestHeaders.Add("Accept", "application/json");
+            });
+
+            services.AddAutoMapper(config =>
+            {
+                config.AddProfile<MappingProfile>();
+            });
 
             return services;
         }
