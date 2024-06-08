@@ -20,6 +20,13 @@ namespace DesafioDevFullstack.API.Controllers.V2
         [HttpPost]
         public async Task<IActionResult> PostEnderecoAsync(Endereco endereco)
         {
+            var validationResult = endereco.Validate();
+
+            if (!validationResult.IsValid)
+            {
+                return BadRequest(validationResult.Errors);
+            }
+
             await _enderecoService.AddAsync(endereco);
             return Ok(endereco);
         }

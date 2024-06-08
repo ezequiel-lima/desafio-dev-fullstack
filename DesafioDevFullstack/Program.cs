@@ -8,6 +8,9 @@ using DesafioDevFullstack.Application.Services.External.Interfaces;
 using DesafioDevFullstack.Application.Services.External;
 using DesafioDevFullstack.Application.Mappings;
 using Asp.Versioning;
+using FluentValidation.AspNetCore;
+using DesafioDevFullstack.Domain.Entities;
+using FluentValidation;
 
 namespace DesafioDevFullstack
 {
@@ -47,10 +50,15 @@ namespace DesafioDevFullstack
                 options.UseSqlServer(connectionString, x => x.MigrationsAssembly("DesafioDevFullstack.Infra"));
             });
 
-            #region Services container e Swagger/OpenAPI
             // Add services to the container.
             builder.Services.AddControllers();
-            
+
+            #region FluentValidation
+            builder.Services.AddFluentValidationAutoValidation();
+            builder.Services.AddFluentValidationClientsideAdapters();
+            builder.Services.AddValidatorsFromAssemblyContaining<EnderecoValidator>();
+            #endregion
+
             #region Versioning
             // Configure API Versioning
             builder.Services.AddApiVersioning(options =>
@@ -73,7 +81,6 @@ namespace DesafioDevFullstack
                 options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "API v1", Version = "v1" });
                 options.SwaggerDoc("v2", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "API v2", Version = "v2" });
             });
-            #endregion
 
             #region Cors
             builder.Services.AddCors(options =>
