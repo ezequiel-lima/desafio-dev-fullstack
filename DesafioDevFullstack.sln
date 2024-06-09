@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesafioDevFullstack.API", "DesafioDevFullstack\DesafioDevFullstack.API.csproj", "{DFA39F9E-E081-46B8-9CE2-F29A7A54053B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesafioDevFullstack.API", "DesafioDevFullstack\DesafioDevFullstack.API.csproj", "{DFA39F9E-E081-46B8-9CE2-F29A7A54053B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesafioDevFullstack.Application", "DesafioDevFullstack.Application\DesafioDevFullstack.Application.csproj", "{175125EF-BEE4-48D8-ABDF-29574AD2B153}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesafioDevFullstack.Application", "DesafioDevFullstack.Application\DesafioDevFullstack.Application.csproj", "{175125EF-BEE4-48D8-ABDF-29574AD2B153}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesafioDevFullstack.Domain", "DesafioDevFullstack.Domain\DesafioDevFullstack.Domain.csproj", "{C4A4B4EF-50C7-4843-8052-54C87B8FC02C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesafioDevFullstack.Domain", "DesafioDevFullstack.Domain\DesafioDevFullstack.Domain.csproj", "{C4A4B4EF-50C7-4843-8052-54C87B8FC02C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesafioDevFullstack.Infra", "DesafioDevFullstack.Infra\DesafioDevFullstack.Infra.csproj", "{E83B75ED-5B00-4CDD-879B-709DF949AF42}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesafioDevFullstack.Infra", "DesafioDevFullstack.Infra\DesafioDevFullstack.Infra.csproj", "{E83B75ED-5B00-4CDD-879B-709DF949AF42}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesafioDevFullstack.Shared", "DesafioDevFullstack.Shared\DesafioDevFullstack.Shared.csproj", "{28F675D3-3452-49B3-AE51-45FCBB869F18}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesafioDevFullstack.Shared", "DesafioDevFullstack.Shared\DesafioDevFullstack.Shared.csproj", "{28F675D3-3452-49B3-AE51-45FCBB869F18}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesafioDevFullstack.Tests", "DesafioDevFullstack.Tests\DesafioDevFullstack.Tests.csproj", "{F92190EC-3B91-45B5-98F4-F5C5374D8A50}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{28F675D3-3452-49B3-AE51-45FCBB869F18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28F675D3-3452-49B3-AE51-45FCBB869F18}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28F675D3-3452-49B3-AE51-45FCBB869F18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F92190EC-3B91-45B5-98F4-F5C5374D8A50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F92190EC-3B91-45B5-98F4-F5C5374D8A50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F92190EC-3B91-45B5-98F4-F5C5374D8A50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F92190EC-3B91-45B5-98F4-F5C5374D8A50}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -11,9 +11,11 @@ using Asp.Versioning;
 using FluentValidation.AspNetCore;
 using DesafioDevFullstack.Domain.Entities;
 using FluentValidation;
+using System.Diagnostics.CodeAnalysis;
 
 namespace DesafioDevFullstack
 {
+    [ExcludeFromCodeCoverage]
     public class Program
     {
         public static void Main(string[] args)
