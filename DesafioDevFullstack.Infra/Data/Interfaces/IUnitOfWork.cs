@@ -2,8 +2,7 @@
 {
     public interface IUnitOfWork
     {
-        IReadRepository<T> ReadRepository<T>() where T : class;
-        IWriteRepository<T> WriteRepository<T>() where T : class;
+        IBaseRepository<T> BaseRepository<T>() where T : class;
         Task<int> CompleteAsync();
     }
 }

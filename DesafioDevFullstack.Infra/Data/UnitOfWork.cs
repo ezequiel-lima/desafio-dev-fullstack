@@ -5,34 +5,22 @@ namespace DesafioDevFullstack.Infra.Data
     public sealed class UnitOfWork : IUnitOfWork
     {
         private readonly DesafioDataContext _context;
-        private readonly Dictionary<Type, object> _readRepositories = new();
-        private readonly Dictionary<Type, object> _writeRepositories = new();
+        private readonly Dictionary<Type, object> _repositories = new();
 
         public UnitOfWork(DesafioDataContext context)
         {
             _context = context;
         }
 
-        public IReadRepository<T> ReadRepository<T>() where T : class
+        public IBaseRepository<T> BaseRepository<T>() where T : class
         {
             var type = typeof(T);
-            if (!_readRepositories.ContainsKey(type))
+            if (!_repositories.ContainsKey(type))
             {
-                var repositoryInstance = new ReadRepository<T>(_context);
-                _readRepositories[type] = repositoryInstance;
+                var repositoryInstance = new BaseRepository<T>(_context);
+                _repositories[type] = repositoryInstance;
             }
-            return (IReadRepository<T>)_readRepositories[type];
-        }
-
-        public IWriteRepository<T> WriteRepository<T>() where T : class
-        {
-            var type = typeof(T);
-            if (!_writeRepositories.ContainsKey(type))
-            {
-                var repositoryInstance = new WriteRepository<T>(_context);
-                _writeRepositories[type] = repositoryInstance;
-            }
-            return (IWriteRepository<T>)_writeRepositories[type];
+            return (IBaseRepository<T>)_repositories[type];
         }
 
         public async Task<int> CompleteAsync()

@@ -104,8 +104,7 @@ namespace DesafioDevFullstack
             var services = builder.Services;
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped(typeof(IReadRepository<>), typeof(ReadRepository<>));
-            services.AddScoped(typeof(IWriteRepository<>), typeof(WriteRepository<>));
+            services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             services.AddScoped(typeof(IGenericService<>), typeof(GenericService<>));
 
             services.AddHttpClient<IEnderecoExternoService, EnderecoExternoService>(client =>

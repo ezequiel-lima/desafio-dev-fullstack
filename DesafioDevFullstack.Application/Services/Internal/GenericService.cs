@@ -6,44 +6,42 @@ namespace DesafioDevFullstack.Application.Services.Internal
     public class GenericService<T> : IGenericService<T> where T : class
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IReadRepository<T> _readRepository;
-        private readonly IWriteRepository<T> _writeRepository;
+        private readonly IBaseRepository<T> _repository;
 
         public GenericService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _readRepository = _unitOfWork.ReadRepository<T>();
-            _writeRepository = _unitOfWork.WriteRepository<T>();
+            _repository = _unitOfWork.BaseRepository<T>();
         }
 
         public async Task<IEnumerable<T>> GetAllAsync()
         {
-            return await _readRepository.GetAllAsync();
+            return await _repository.GetAllAsync();
         }
 
-        public async Task<T> GetByIdAsync(int id)
+        public async Task<T> GetByIdAsync(Guid id)
         {
-            return await _readRepository.GetByIdAsync(id);
+            return await _repository.GetByIdAsync(id);
         }
 
         public async Task AddAsync(T entity)
         {
-            await _writeRepository.AddAsync(entity);
+            await _repository.AddAsync(entity);
             await _unitOfWork.CompleteAsync();
         }
 
         public async Task UpdateAsync(T entity)
         {
-            _writeRepository.Update(entity);
+            _repository.Update(entity);
             await _unitOfWork.CompleteAsync();
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(Guid id)
         {
-            var entity = await _readRepository.GetByIdAsync(id);
+            var entity = await _repository.GetByIdAsync(id);
             if (entity != null)
             {
-                _writeRepository.Delete(entity);
+                _repository.Delete(entity);
                 await _unitOfWork.CompleteAsync();
             }
         }

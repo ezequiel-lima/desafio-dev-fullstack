@@ -9,10 +9,12 @@ namespace DesafioDevFullstack.Infra
         public DesafioDataContext(DbContextOptions<DesafioDataContext> options) : base(options) { }
 
         public DbSet<Endereco> Enderecos { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new EnderecoMap());
+            modelBuilder.ApplyConfiguration(new UsuarioMap());
         }
     }
 }
