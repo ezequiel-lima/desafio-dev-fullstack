@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -20,6 +20,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DesafioDevFullstack.Application\DesafioDevFullstack.Application.csproj" />
     <ProjectReference Include="..\DesafioDevFullstack.Infra\DesafioDevFullstack.Infra.csproj" />
+    <ProjectReference Include="..\DesafioDevFullstack.Shared\DesafioDevFullstack.Shared.csproj" />
   </ItemGroup>
 
 </Project>

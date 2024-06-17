@@ -5,6 +5,6 @@ namespace DesafioDevFullstack.Infra.Data.Repositories.Interfaces
 {
     public interface IUsuarioRepository : IBaseRepository<Usuario>
     {
-        Task<Usuario> GetByNameAndPasswordAsync(string nome, string senha);
+        Task<Usuario> GetByNameAsync(string nome);
     }
 }

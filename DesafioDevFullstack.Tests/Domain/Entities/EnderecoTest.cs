@@ -1,4 +1,5 @@
 ﻿using DesafioDevFullstack.Domain.Entities;
+using DesafioDevFullstack.Domain.Validators;
 using FluentAssertions;
 
 namespace DesafioDevFullstack.Tests.Domain.Entities
@@ -29,7 +30,7 @@ namespace DesafioDevFullstack.Tests.Domain.Entities
 
             var resultado = _validador.Validate(endereco);
 
-            resultado.Errors.Should().Contain(x => x.PropertyName == "Cep" && x.ErrorMessage == "CEP deve conter 8 numeros");
+            resultado.Errors.Should().Contain(x => x.PropertyName == "Cep" && x.ErrorMessage == "CEP deve conter 8 números");
         }
 
         [Fact]

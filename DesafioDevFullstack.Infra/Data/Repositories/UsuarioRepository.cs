@@ -1,5 +1,6 @@
 ﻿using DesafioDevFullstack.Domain.Entities;
 using DesafioDevFullstack.Infra.Data.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace DesafioDevFullstack.Infra.Data.Repositories
 {
@@ -9,9 +10,9 @@ namespace DesafioDevFullstack.Infra.Data.Repositories
         {
         }
 
-        public Task<Usuario> GetByNameAndPasswordAsync(string nome, string senha)
+        public async Task<Usuario> GetByNameAsync(string nome)
         {
-            throw new NotImplementedException();
+            return await _context.Usuarios.FirstOrDefaultAsync(x => x.Nome == nome);
         }
     }
 }

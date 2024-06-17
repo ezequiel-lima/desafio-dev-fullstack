@@ -1,5 +1,5 @@
-﻿using DesafioDevFullstack.Shared.Entities;
-using FluentValidation;
+﻿using DesafioDevFullstack.Domain.Validators;
+using DesafioDevFullstack.Shared.Entities;
 using FluentValidation.Results;
 
 namespace DesafioDevFullstack.Domain.Entities
@@ -28,22 +28,6 @@ namespace DesafioDevFullstack.Domain.Entities
         public ValidationResult Validate()
         {
             return new EnderecoValidator().Validate(this);
-        }
-    }
-
-    public sealed class EnderecoValidator : AbstractValidator<Endereco>
-    {
-        public EnderecoValidator()
-        {
-            RuleFor(x => x.Cep)
-                .NotEmpty().WithMessage("CEP é obrigatório.")
-                .Matches(@"^\d{8}$").WithMessage("CEP deve conter 8 numeros");
-
-            RuleFor(x => x.Estado)
-                .NotEmpty().WithMessage("Estado é obrigatório.");
-
-            RuleFor(x => x.Cidade)
-                .NotEmpty().WithMessage("Cidade é obrigatória.");
         }
     }
 }

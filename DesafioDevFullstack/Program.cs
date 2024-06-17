@@ -1,17 +1,8 @@
 using DesafioDevFullstack.Infra;
-using DesafioDevFullstack.Infra.Data.Interfaces;
-using DesafioDevFullstack.Infra.Data;
 using Microsoft.EntityFrameworkCore;
-using DesafioDevFullstack.Application.Services.Internal.Interfaces;
-using DesafioDevFullstack.Application.Services.Internal;
-using DesafioDevFullstack.Application.Services.External.Interfaces;
-using DesafioDevFullstack.Application.Services.External;
-using DesafioDevFullstack.Application.Mappings;
 using Asp.Versioning;
-using FluentValidation.AspNetCore;
-using DesafioDevFullstack.Domain.Entities;
-using FluentValidation;
 using System.Diagnostics.CodeAnalysis;
+using DesafioDevFullstack.Application.Configuration;
 
 namespace DesafioDevFullstack
 {
@@ -38,8 +29,9 @@ namespace DesafioDevFullstack
             }
 
             app.UseHttpsRedirection();
-            app.UseAuthorization();
             app.UseCors();
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.MapControllers();
             app.Run();
         }
@@ -54,12 +46,6 @@ namespace DesafioDevFullstack
 
             // Add services to the container.
             builder.Services.AddControllers();
-
-            #region FluentValidation
-            builder.Services.AddFluentValidationAutoValidation();
-            builder.Services.AddFluentValidationClientsideAdapters();
-            builder.Services.AddValidatorsFromAssemblyContaining<EnderecoValidator>();
-            #endregion
 
             #region Versioning
             // Configure API Versioning
@@ -78,12 +64,7 @@ namespace DesafioDevFullstack
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen(options =>
-            {
-                options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "API v1", Version = "v1" });
-                options.SwaggerDoc("v2", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "API v2", Version = "v2" });
-            });
-
+            SwaggerConfig.AddSwaggerConfiguration(builder.Services);
             #region Cors
             builder.Services.AddCors(options =>
             {
@@ -96,29 +77,11 @@ namespace DesafioDevFullstack
             });
             #endregion
 
-            var services = GetServiceCollection(builder);
-        }
-
-        private static IServiceCollection GetServiceCollection(WebApplicationBuilder builder)
-        {
-            var services = builder.Services;
-
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
-            services.AddScoped(typeof(IGenericService<>), typeof(GenericService<>));
-
-            services.AddHttpClient<IEnderecoExternoService, EnderecoExternoService>(client =>
-            {
-                client.BaseAddress = new Uri("https://brasilapi.com.br/api/cep/v2/");
-                client.DefaultRequestHeaders.Add("Accept", "application/json");
-            });
-
-            services.AddAutoMapper(config =>
-            {
-                config.AddProfile<MappingProfile>();
-            });
-
-            return services;
+            AuthenticationConfig.AddJwtAuthentication(builder.Services);
+            DependencyInjection.AddProjectDependencies(builder.Services);
+            AutoMapperConfig.AddAutoMapperConfiguration(builder.Services);
+            FluentValidationConfig.AddFluentValidationConfiguration(builder.Services);
+            
         }
     }
 }

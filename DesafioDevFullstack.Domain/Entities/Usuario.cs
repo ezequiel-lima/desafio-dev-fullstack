@@ -16,5 +16,10 @@ namespace DesafioDevFullstack.Domain.Entities
         public string Nome { get; private set; }
         public string Senha { get; private set; }
         public string Role { get; private set; }
+
+        public void LimparSenha()
+        {
+            Senha = "";
+        }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using DesafioDevFullstack.Application.Dtos.Enderecos;
-using DesafioDevFullstack.Domain.Entities;
 
 namespace DesafioDevFullstack.Application.Mappings
 {

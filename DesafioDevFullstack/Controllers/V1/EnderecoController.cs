@@ -1,5 +1,6 @@
 ﻿using Asp.Versioning;
 using DesafioDevFullstack.Application.Services.External.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DesafioDevFullstack.API.Controllers.V1
@@ -16,6 +17,7 @@ namespace DesafioDevFullstack.API.Controllers.V1
             _enderecoExternoService = enderecoExternoService;
         }
 
+        [Authorize]
         [HttpGet("{cep}")]
         public async Task<IActionResult> GetEnderecoByCepAsync(string cep)
         {
